@@ -4,7 +4,7 @@ import { Input } from '../../shared/ui/input/input';
 import { FieldTree, form, FormField, required } from '@angular/forms/signals';
 import { LoginData } from './login.types';
 import { Button } from '../../shared/ui/button/button';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
     selector: 'app-login',

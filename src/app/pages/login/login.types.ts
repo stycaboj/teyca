@@ -4,5 +4,5 @@ export interface LoginData {
 }
 
 export interface LoginResponse {
-    token: string;
+    auth_token: string;
 }

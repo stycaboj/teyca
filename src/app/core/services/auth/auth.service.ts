@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginData, LoginResponse } from '../../pages/login/login.types';
+import { LoginData, LoginResponse } from '../../../pages/login/login.types';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,13 +12,19 @@ export class AuthService {
     private _router: Router = inject(Router);
     private readonly _apiUrl: string = 'https://api.teyca.ru/test-auth-only';
 
-    private readonly _token: WritableSignal<string | null> = signal<string | null>(localStorage.getItem('token'));
+    private readonly _auth_token: WritableSignal<string | null> = signal<string | null>(
+        localStorage.getItem('auth_token')
+    );
+
+    public isAuthenticated(): boolean {
+        return !!this._auth_token();
+    }
 
     public login(data: LoginData): void {
         this._http.post<LoginResponse>(this._apiUrl, data).subscribe({
             next: (res) => {
-                localStorage.setItem('token', res.token);
-                this._token.set(res.token);
+                localStorage.setItem('auth_token', res.auth_token);
+                this._auth_token.set(res.auth_token);
                 this._router.navigate(['/clients']);
             },
             error: (err) => {
@@ -28,8 +34,8 @@ export class AuthService {
     }
 
     public logout(): void {
-        localStorage.removeItem('token');
-        this._token.set(null);
+        localStorage.removeItem('auth_token');
+        this._auth_token.set(null);
         this._router.navigate(['/login']);
-  }
+    }
 }
