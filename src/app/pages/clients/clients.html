@@ -1,0 +1,36 @@
+<div class="header">
+    <div class="knowledge-base">
+        <img src="images/knowledge.svg" alt="">
+        <span>{{ 'clients.knowledge_base' | translate }}</span>
+    </div>
+    <div class="account">
+        <img class="avatar" src="images/avatar.svg" alt="">
+        <div class="info">
+            <div class="name">
+                <span>{{ 'clients.account.name' | translate }}</span>
+            </div>
+            <div class="position">
+                <span>{{ 'clients.account.position' | translate }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav-bar">
+    <div class="nav-bar__button disabled-button">
+        {{ 'clients.nav_bar.settings' | translate }}
+    </div>
+    <div class="nav-bar__button table-button">
+        {{ 'clients.nav_bar.clients' | translate }}
+    </div>
+</div>
+<!-- TODO: По-хорошему было бы вынести nav-bar в shared. К тому же header и nav-bar можно было бы вынести в отдельный компонент, внутри которого можно было бы перемещаться по роутам, но в масштабах тестового задания я посчитал это избыточным. -->
+<div class="table-container">
+    <div class="table-info">
+        <div class="title">
+            <span>{{ 'clients.table.title' | translate }}</span>
+        </div>
+        <div class="description">
+            <span>{{ 'clients.table.description' | translate }}</span>
+        </div>
+    </div>
+</div>

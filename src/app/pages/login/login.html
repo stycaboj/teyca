@@ -1,0 +1,30 @@
+<div class="login-container">
+    <div class="welcome-container">
+        <img class="logo" src="images/logo.svg">
+        <div class="text-container">
+            <span class="title">
+                {{ 'login.title' | translate }}
+            </span>
+            <span class="subtitle">
+                {{ 'login.subtitle' | translate }}
+            </span>
+        </div>
+        <div class="inputs-container">
+            <teyca-input [type]="'text'" [placeholder]="'login.input.login' | translate"
+                [formField]="loginForm.login"></teyca-input>
+            <teyca-input [type]="'password'" [placeholder]="'login.input.password' | translate"
+                [formField]="loginForm.password"></teyca-input>
+        </div>
+        <button teyca-button [text]="'login.button.login' | translate" class="login-button" (click)="login()"></button>
+        <div class="or-container">
+            <div class="divider"></div>
+            <span>{{ "login.or" | translate }}</span>
+            <div class="divider"></div>
+        </div>
+        <div class="register-container">
+            <span>{{ "login.already_register" | translate }}</span>
+            <span class="register">{{ "login.register" | translate }}</span>
+        </div>
+    </div>
+</div>
+<div class="loyalty-container"></div>

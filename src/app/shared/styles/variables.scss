@@ -1,0 +1,22 @@
+:root {
+    --black-12: #1F1F1F;
+    --gray-60: #999999;
+    --white: #FFFFFF;
+    --white-90: #E5E5E5;
+    --white-95: #F2F2F2;
+    --red: #FF0000;
+    --blue: #1D72FF;
+
+    --input-border-color: var(--gray-60);
+    --input-required-error-color: var(--red);
+
+    --login-text-color: var(--black-12);
+    --login-button-text-color: var(--white);
+    --login-button-background-color: var(--black-12);
+    --login-divider-color: var(--gray-60);
+    --login-text-url-color: var(--blue);
+
+    --clients-header-border-color: var(--white-90);
+    --clients-text-color: var(--black-12);
+    --clients-description-color: var(--gray-60);
+}
