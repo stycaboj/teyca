@@ -33,4 +33,113 @@
             <span>{{ 'clients.table.description' | translate }}</span>
         </div>
     </div>
+    <div class="search-container">
+        <teyca-input type="text" [placeholder]="'clients.search' | translate" [(value)]="searchQuery"></teyca-input>
+        <button teyca-button class="push-button" [text]="'clients.push' | translate" [icon]="'images/push.svg'"></button>
+    </div>
+    <table tuiTable>
+        <thead>
+            <tr class="columns">
+                <th tuiTh>
+                    <input type="checkbox" />
+                </th>
+                <th tuiTh>{{ 'clients.table.column.user_id' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.device' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.template' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.barcode' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.first_name' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.last_name' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.phone' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.discount' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.bonus' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.average_bill' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.summ_all' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.link' | translate }}</th>
+                <th tuiTh>{{ 'clients.table.column.created_at' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody>
+            @for (client of clients(); track $index) {
+            <tr>
+                <td tuiTd>
+                    <input type="checkbox" />
+                </td>
+                <td tuiTd>
+                    {{ client.user_id }}
+                </td>
+                <td tuiTd>
+                    <img src="images/telegram.svg" alt="">
+                    <img src="images/apple.svg" alt="">
+                </td>
+                <td tuiTd>
+                    {{ client.template }}
+                </td>
+                <td tuiTd>
+                    {{ client.barcode }}
+                </td>
+                <td tuiTd>
+                    {{ client.first_name | dash }}
+                </td>
+                <td tuiTd>
+                    {{ client.last_name }}
+                </td>
+                <td tuiTd>
+                    {{ client.phone }}
+                </td>
+                <td tuiTd>
+                    <!-- TODO процент для скидки -->
+                    {{ client.discount | dash }}
+                </td>
+                <td tuiTd>
+                    {{ client.bonus | dash }}
+                </td>
+                <td tuiTd>
+                    {{ getAverageBill(client) | dash }}
+                </td>
+                <td tuiTd>
+                    {{ client.summ_all | dash }}
+                </td>
+                <td tuiTd>
+                    <a [href]="getLink(client)">
+                        <img src="images/export.svg" />
+                    </a>
+                </td>
+                <td tuiTd>
+                    {{ client.created_at | date:'H:mm dd.MM.yyyy' }}
+                </td>
+            </tr>
+            }
+            <tr>
+                <td [colSpan]="14">
+                    <div class="pagination-container">
+                        <div class="count">
+                            <span class="elements-text">
+                                {{ 'clients.table.pagination.elements_text' | translate }}
+                            </span>
+                            <!-- TODO: Вёрстка селекта (если есть варик то вынести его в отдельный компонент хотя хз) -->
+                            <select (change)="changePageSize($any($event.target).value)" [value]="pageSize()">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="elements-count">
+                                {{ startItem() }}-{{ endItem() }} {{ 'clients.table.pagination.out_of' | translate }} {{ total() }}
+                            </span>
+                        </div>
+                        <div class="buttons">
+                            <img src="images/first_page_button.svg" (click)="goToFirstPage()"
+                                [class.disabled]="currentPage() === 1">
+                            <img src="images/previous_page_button.svg" (click)="goToPrevPage()"
+                                [class.disabled]="currentPage() === 1">
+                            <img src="images/next_page_button.svg" (click)="goToNextPage()"
+                                [class.disabled]="currentPage() === totalPages()">
+                            <img src="images/last_page_button.svg" (click)="goToLastPage()"
+                                [class.disabled]="currentPage() === totalPages()">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

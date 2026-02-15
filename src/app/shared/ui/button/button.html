@@ -1,1 +1,7 @@
-{{ text() }}
+@if (text()) {
+    {{ text() }}
+}
+
+@if (icon()) {
+    <img [src]="icon()">
+}

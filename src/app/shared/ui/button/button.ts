@@ -6,6 +6,7 @@ import { Component, input, InputSignal } from '@angular/core';
     templateUrl: './button.html',
     styleUrl: './button.scss',
 })
-export class Button {
-    public text: InputSignal<string> = input<string>('');
+export class TeycaButton {
+    public readonly text: InputSignal<string> = input<string>('');
+    public readonly icon: InputSignal<string> = input<string>('');
 }

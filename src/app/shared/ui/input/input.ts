@@ -10,7 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class Input implements FormValueControl<string> {
+export class TeycaInput implements FormValueControl<string> {
     public value: ModelSignal<string> = model<string>('');
     public type: InputSignal<'text' | 'password'> = input.required<'text' | 'password'>();
     public placeholder: InputSignal<string> = input<string>('');
