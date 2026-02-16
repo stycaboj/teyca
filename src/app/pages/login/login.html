@@ -10,10 +10,20 @@
             </span>
         </div>
         <div class="inputs-container">
-            <teyca-input [type]="'text'" [placeholder]="'login.input.login' | translate"
-                [formField]="loginForm.login"></teyca-input>
-            <teyca-input [type]="'password'" [placeholder]="'login.input.password' | translate"
-                [formField]="loginForm.password"></teyca-input>
+            <div class="input-wrapper">
+                <teyca-input [type]="'text'" [placeholder]="'login.input.login' | translate"
+                    [formField]="loginForm.login"></teyca-input>
+                @if (loginForm.login().invalid() && loginForm.login().touched()) {
+                    <teyca-error class="required-error" [text]="'ui.error.validation.required' | translate"></teyca-error>
+                }
+            </div>
+            <div class="input-wrapper">
+                <teyca-input [type]="'password'" [placeholder]="'login.input.password' | translate"
+                    [formField]="loginForm.password"></teyca-input>
+                @if (loginForm.password().invalid() && loginForm.password().touched()) {
+                    <teyca-error class="required-error" [text]="'ui.error.validation.required' | translate"></teyca-error>
+                }
+            </div>
         </div>
         <button teyca-button [text]="'login.button.login' | translate" class="login-button" (click)="login()"></button>
         <div class="or-container">
@@ -27,4 +37,33 @@
         </div>
     </div>
 </div>
-<div class="loyalty-container"></div>
+<div class="loyalty-container">
+    <div class="loyalty-container__header">
+        <span class="maintitle">{{ "login.loyalty.maintitle" | translate }}</span>
+        <span class="subtitle">{{ "login.loyalty.subtitle" | translate }}</span>
+    </div>
+    <div class="loyalty-container__footer">
+        <div class="options-container">
+            <div class="option">
+                <img src="images/loyalty_bonus.svg" alt="">
+                <div class="option__text">{{ 'login.loyalty.option.bonus' | translate }}</div>
+            </div>
+            <div class="option">
+                <img src="images/loyalty_level.svg" alt="">
+                <div class="option__text">{{ 'login.loyalty.option.level' | translate }}</div>
+            </div>
+            <div class="option">
+                <img src="images/loyalty_fire.svg" alt="">
+                <div class="option__text">{{ 'login.loyalty.option.fire' | translate }}</div>
+            </div>
+            <div class="option">
+                <img src="images/loyalty_defence.svg" alt="">
+                <div class="option__text">{{ 'login.loyalty.option.defence' | translate }}</div>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button class="button prev" teyca-button [icon]="'images/loyalty_prev.svg'"></button>
+            <button class="button next" teyca-button [icon]="'images/loyalty_next.svg'"></button>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,10 @@
 :root {
+    --black-10: #1A1A1A;
     --black-12: #1F1F1F;
     --gray-60: #999999;
+    --gray-80: #CCCCCC;
     --white: #FFFFFF;
+    --white-85: #F3F3F1;
     --white-90: #E5E5E5;
     --white-95: #F2F2F2;
     --red: #FF0000;
@@ -16,6 +19,10 @@
     --login-divider-color: var(--gray-60);
     --login-text-url-color: var(--blue);
 
+    --loyalty-text-color: var(--black-10);
+    --loyalty-background-color: var(--white-85);
+    --loyalty-next-button-background-color: var(--black-12);
+
     --clients-header-border-color: var(--white-90);
     --clients-text-color: var(--black-12);
     --clients-description-color: var(--gray-60);
@@ -24,6 +31,8 @@
     --table-border-color: var(--white-90);
     --table-border-checkbox-color: var(--black-12);
     --table-border-checkbox-header-color: var(--gray-60);
-
     --table-pagination-text-color: var(--gray-60);
+
+    --push-dialog-text-color: var(--black-12);
+    --push-dialog-border-color: var(--gray-80);
 }

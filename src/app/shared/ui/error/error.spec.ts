@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TeycaInput } from './input';
 
-describe('Input', () => {
-  let component: TeycaInput;
-  let fixture: ComponentFixture<TeycaInput>;
+import { Error } from './error';
+
+describe('Error', () => {
+  let component: Error;
+  let fixture: ComponentFixture<Error>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TeycaInput]
+      imports: [Error]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TeycaInput);
+    fixture = TestBed.createComponent(Error);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

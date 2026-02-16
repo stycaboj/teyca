@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    padding: 20px;
+    padding: 1.25rem;
 
     .login-container {
         display: flex;
@@ -49,6 +49,14 @@
         width: 100%;
         gap: 1.313rem;
         padding-bottom: 1.25rem;
+
+        .input-wrapper {
+            position: relative;
+
+            teyca-error {
+                position: absolute;
+            }
+        }
     }
 
     .login-button {
@@ -93,5 +101,79 @@
         }
     }
 
-    .loyalty-container {}
+    .loyalty-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 2.188rem;
+        border-radius: 1.25rem;
+        height: 100%;
+        width: 100%;
+        max-width: 44.063rem;
+        background-image: url("../../../../public/images/loyalty.svg");
+        background-color: var(--loyalty-background-color);
+        color: var(--loyalty-text-color);
+
+        &__header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.313rem;
+
+            font-size: 30px;
+            line-height: 110%;
+
+            .maintitle {
+                font-weight: 400;
+            }
+
+            .subtitle {
+                font-weight: 700;
+            }
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+
+            .options-container {
+                display: flex;
+                flex-direction: column;
+                gap: 0.625rem;
+
+                .option {
+                    display: flex;
+                    gap: 0.35rem;
+
+                    font-size: 14px;
+                    font-weight: 700;
+                    line-height: 135%;
+                    letter-spacing: -0.019rem;
+
+                    img {
+                        margin-top: -0.125rem;
+                    }
+                }
+            }
+
+            .buttons-container {
+                display: flex;
+                align-items: end;
+                gap: 0.6rem;
+
+                .button {
+                    width: 3rem;
+                    height: 2.875rem;
+                    border-radius: 0.625rem;
+                }
+
+                .prev {
+                    background: none;
+                }
+
+                .next {
+                    background-color: var(--loyalty-next-button-background-color);
+                }
+            }
+        }
+    }
 }

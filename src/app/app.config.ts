@@ -19,7 +19,6 @@ export const appConfig: ApplicationConfig = {
             }),
             lang: 'ru',
         }),
-        provideEventPlugins(),
         provideEventPlugins()
     ],
 };
