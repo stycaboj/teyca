@@ -1,10 +1,10 @@
 <div class="header">
     <div class="knowledge-base">
-        <img src="images/knowledge.svg" >
+        <img src="images/knowledge.svg">
         <span>{{ 'clients.knowledge_base' | translate }}</span>
     </div>
     <div class="account">
-        <img class="avatar" src="images/avatar.svg" >
+        <img class="avatar" src="images/avatar.svg">
         <div class="info">
             <div class="name">
                 <span>{{ 'clients.account.name' | translate }}</span>
@@ -36,15 +36,18 @@
     <div class="search-container">
         <teyca-input type="text" [placeholder]="'clients.search' | translate" [(value)]="searchQuery"></teyca-input>
         @if (showNoSelectedIdsError()) {
-            <teyca-error [text]="'ui.error.user_id_null' | translate"></teyca-error>
+        <teyca-error [text]="'ui.error.user_id_null' | translate"></teyca-error>
         }
-        <button teyca-button class="push-button" [text]="'clients.push_button' | translate" [icon]="'images/push.svg'" (click)="openPushDialog()"></button>
+        <button teyca-button class="push-button" [text]="'clients.push_button' | translate" [icon]="'images/push.svg'"
+            (click)="openPushDialog()"></button>
     </div>
     <table tuiTable>
         <thead>
             <tr class="columns">
                 <th tuiTh class="top-left">
-                    <teyca-checkbox class="header-checkbox" [checked]="selectedIds().length === clients().length && clients().length > 0" (change)="toggleAll($event)"></teyca-checkbox>
+                    <teyca-checkbox class="header-checkbox"
+                        [checked]="selectedIds().length === clients().length && clients().length > 0"
+                        (change)="toggleAll($event)"></teyca-checkbox>
                 </th>
                 <th tuiTh>{{ 'clients.table.column.user_id' | translate }}</th>
                 <th tuiTh>{{ 'clients.table.column.device' | translate }}</th>
@@ -65,14 +68,15 @@
             @for (client of clients(); track client.user_id) {
             <tr>
                 <td tuiTd>
-                    <teyca-checkbox [checked]="selectedIds().includes(client.user_id)" (change)="toggleSelection(client.user_id, $event)" />
+                    <teyca-checkbox [checked]="selectedIds().includes(client.user_id)"
+                        (change)="toggleSelection(client.user_id, $event)" />
                 </td>
                 <td tuiTd>
                     {{ client.user_id }}
                 </td>
                 <td tuiTd>
-                    <img src="images/telegram.svg" >
-                    <img src="images/apple.svg" >
+                    <img src="images/telegram.svg">
+                    <img src="images/apple.svg">
                 </td>
                 <td tuiTd>
                     {{ client.template }}
@@ -119,15 +123,11 @@
                             <span class="elements-text">
                                 {{ 'clients.table.pagination.elements_text' | translate }}
                             </span>
-                            <!-- TODO: Вёрстка селекта (если есть варик то вынести его в отдельный компонент хотя хз) -->
-                            <select (change)="changePageSize($any($event.target).value)" [value]="pageSize()">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
+                            <teyca-select [value]="pageSize().toString()" [options]="pageSizeOptions"
+                                (valueChange)="changePageSize($event)"></teyca-select>
                             <span class="elements-count">
-                                {{ startItem() }}-{{ endItem() }} {{ 'clients.table.pagination.out_of' | translate }} {{ total() }}
+                                {{ startItem() }} - {{ endItem() }} {{ 'clients.table.pagination.out_of' | translate }} {{
+                                total() }}
                             </span>
                         </div>
                         <div class="buttons">

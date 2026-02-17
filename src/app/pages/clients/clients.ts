@@ -23,6 +23,8 @@ import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { PushDialog } from './push-dialog/push-dialog';
 import { TeycaCheckbox } from '../../shared/ui/checkbox/checkbox';
 import { Error } from '../../shared/ui/error/error';
+import { TeycaSelect } from '../../shared/ui/select/select';
+import { SelectOption } from '../../core/types/select.types';
 
 @Component({
     selector: 'app-clients',
@@ -35,6 +37,7 @@ import { Error } from '../../shared/ui/error/error';
         TeycaButton,
         TeycaCheckbox,
         Error,
+        TeycaSelect,
     ],
     templateUrl: './clients.html',
     styleUrl: './clients.scss',
@@ -66,11 +69,23 @@ export class Clients implements OnInit {
 
     private readonly searchQuery$: Observable<string> = toObservable(this.searchQuery);
 
+    public readonly pageSizeOptions: SelectOption[] = [
+        { value: '10', label: '10' },
+        { value: '20', label: '20' },
+        { value: '50', label: '50' },
+        { value: '100', label: '100' },
+    ];
+
     public ngOnInit(): void {
         this.loadClients();
 
         this.searchQuery$
-            .pipe(debounceTime(300), distinctUntilChanged(), skip(1), takeUntilDestroyed(this._destroyRef))
+            .pipe(
+                debounceTime(300),
+                distinctUntilChanged(),
+                skip(1),
+                takeUntilDestroyed(this._destroyRef)
+            )
             .subscribe(() => {
                 this.currentPage.set(1);
                 this.loadClients();
@@ -149,8 +164,8 @@ export class Clients implements OnInit {
         return 'https://cards.teyca.ru/download/' + client.link;
     }
 
-    public changePageSize(size: number): void {
-        this.pageSize.set(size);
+    public changePageSize(size: string): void {
+        this.pageSize.set(Number(size));
         this.currentPage.set(1);
         this.loadClients();
     }
