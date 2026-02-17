@@ -1,0 +1,24 @@
+:host {
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        font-family: 'Manrope', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        padding: 0.656rem 40px 0.656rem 14px;
+        border-radius: 0.313rem;
+        border: 0.063rem solid var(--select-border-color);
+        outline: none;
+
+        background-image: url(../../../../../public/images/rectangle.svg);
+        background-repeat: no-repeat;
+        background-position: right 0.656rem center;
+
+        &:focus {
+            background-image: url(../../../../../public/images/rectangle_up.png);
+        }
+    }
+}

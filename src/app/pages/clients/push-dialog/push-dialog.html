@@ -1,0 +1,42 @@
+<div class="label">
+    <span>{{ 'clients.push_dialog.label' | translate}}</span>
+</div>
+<div class="message">
+    <div class="title">
+        <span>{{ 'clients.push_dialog.message' | translate }}</span>
+    </div>
+    <textarea #messageInput (input)="onMessageInput(messageInput.value)" [placeholder]="'clients.push_dialog.textarea_placeholder' | translate"></textarea>
+    @if (messageTouched() && !message().trim()) {
+        <teyca-error [text]="'ui.error.validation.required' | translate"></teyca-error>
+    }
+</div>
+<div class="preview">
+    <div class="title">
+        <span>{{ 'clients.push_dialog.preview.title' | translate }}</span>
+    </div>
+    <div class="preview__container">
+        <img src="images/notification.svg" >
+        <div class="notification-info">
+            <div class="notification-info__title">
+                <span>{{ 'clients.push_dialog.preview.name' | translate }}</span>
+            </div>
+            <div class="notification-info__text">
+                {{ message() }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="date">
+    <div class="title">
+        <span>{{ 'clients.push_dialog.date' | translate }}</span>
+    </div>
+    <teyca-select [value]="selectedDate()" [options]="dateOptions" (valueChange)="changeDate($event)"></teyca-select>
+</div>
+<div class="buttons">
+    <button class="cancel-button" teyca-button [text]="'clients.push_dialog.button.cancel' | translate"
+        (click)="close()"></button>
+    <button class="send-button" teyca-button [text]="'clients.push_dialog.button.send' | translate" (click)="send()"></button>
+</div>
+<div class="close-button">
+    <img src="images/close.svg" (click)="close()">
+</div>

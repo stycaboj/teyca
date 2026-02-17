@@ -1,0 +1,25 @@
+:root {
+    --tui-service-backdrop: #0000004D !important;
+}
+
+tui-dialog {
+    .t-content {
+        border-radius: 0.625rem !important;
+        padding: 2.188rem !important;
+        height: 50rem;
+        width: 40.938rem;
+
+        section {
+            height: 100%;
+        }
+    }
+
+    .t-close {
+        display: none;
+    }
+
+    &::after {
+        border-radius: 0.625rem !important;
+        width: 40.938rem !important;
+    }
+}

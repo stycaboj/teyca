@@ -120,6 +120,7 @@
         .search-container {
             display: flex;
             gap: 1.25rem;
+            position: relative;
 
             teyca-input {
                 padding-bottom: 20px;
@@ -127,8 +128,14 @@
             }
 
             .push-button {
-                width: 10.75rem;
+                max-width: 10.75rem;
                 height: 2.875rem;
+            }
+
+            teyca-error {
+                position: absolute;
+                top: -1rem;
+                right: 1rem;
             }
         }
 
@@ -144,6 +151,9 @@
                 font-size: 12px;
                 font-weight: 400;
                 color: var(--table-head-text-color);
+                border: none;
+                border-top: 1px solid var(--table-border-color);
+                padding: 0;
             }
 
             ::ng-deep {
@@ -151,20 +161,24 @@
                     height: 3.25rem;
 
                     td {
+                        padding: 0;
+                        border: none;
                         border-top: 1px solid var(--table-border-color);
                     }
                 }
 
-                input[type="checkbox"] {
-                    // TODO: разобраться
-                    border-radius: 0.063rem;
-                    border: 0.063rem solid var(--table-border-checkbox-color);
-                    width: 16px;
-                    height: 16px;
+                .header-checkbox input {
+                    border: 0.063rem solid var(--table-border-checkbox-header-color) !important;
                 }
 
-                .checkbox-header {
-                    border: 0.063rem solid var(--table-border-checkbox-header-color);
+                .columns {
+                    .top-left {
+                        border-radius: 0.313rem 0 0 0;
+                    }
+
+                    .top-right {
+                        border-radius: 0 0.313rem 0 0;
+                    }
                 }
 
                 .pagination-container {

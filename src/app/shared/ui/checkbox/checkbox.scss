@@ -1,0 +1,36 @@
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background-color: #fff;
+    border: 0.063rem solid var(--table-border-checkbox-color);
+    border-radius: 0.125rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: border-color .2s ease;
+
+    &:checked {
+        background-color: #fff;
+        position: relative;
+
+        &::before {
+            content: '';
+            background-image: url(../../../../../public/images/checked.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            position: absolute;
+            width: 14px;
+            height: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

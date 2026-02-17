@@ -16,27 +16,45 @@ import { DatePipe } from '@angular/common';
 import { DashPipe } from '../../core/pipes/dash-pipe';
 import { TeycaInput } from '../../shared/ui/input/input';
 import { TeycaButton } from '../../shared/ui/button/button';
-import { debounceTime, distinctUntilChanged, Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, skip } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
+import { PushDialog } from './push-dialog/push-dialog';
+import { TeycaCheckbox } from '../../shared/ui/checkbox/checkbox';
+import { Error } from '../../shared/ui/error/error';
 
 @Component({
     selector: 'app-clients',
-    imports: [TranslatePipe, TuiTable, DatePipe, DashPipe, TeycaInput, TeycaButton],
+    imports: [
+        TranslatePipe,
+        TuiTable,
+        DatePipe,
+        DashPipe,
+        TeycaInput,
+        TeycaButton,
+        TeycaCheckbox,
+        Error,
+    ],
     templateUrl: './clients.html',
     styleUrl: './clients.scss',
 })
 export class Clients implements OnInit {
     private readonly _clientsService: ClientsService = inject(ClientsService);
     private readonly _destroyRef: DestroyRef = inject(DestroyRef);
+    private readonly _dialogs: TuiDialogService = inject(TuiDialogService);
 
     public readonly clients: Signal<ClientData[]> = this._clientsService.clients;
     public readonly loading: Signal<boolean> = this._clientsService.loading;
     public readonly total: Signal<number> = this._clientsService.total;
     public readonly error: Signal<string | null> = this._clientsService.error;
 
-    public currentPage: WritableSignal<number> = signal<number>(1);
-    public pageSize: WritableSignal<number> = signal<number>(10);
-    public searchQuery: WritableSignal<string> = signal<string>('');
+    public readonly currentPage: WritableSignal<number> = signal<number>(1);
+    public readonly pageSize: WritableSignal<number> = signal<number>(10);
+    public readonly searchQuery: WritableSignal<string> = signal<string>('');
+
+    public readonly selectedIds: WritableSignal<number[]> = signal<number[]>([]);
+    public readonly showNoSelectedIdsError: WritableSignal<boolean> = signal<boolean>(false);
 
     public totalPages: Signal<number> = computed(() => Math.ceil(this.total() / this.pageSize()));
     public startItem: Signal<number> = computed(
@@ -52,7 +70,7 @@ export class Clients implements OnInit {
         this.loadClients();
 
         this.searchQuery$
-            .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
+            .pipe(debounceTime(300), distinctUntilChanged(), skip(1), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this.currentPage.set(1);
                 this.loadClients();
@@ -70,6 +88,51 @@ export class Clients implements OnInit {
             offset: offset,
             search: search,
         });
+    }
+
+    public openPushDialog(): void {
+        if (this.selectedIds().length === 0) {
+            this.showNoSelectedIdsError.set(true);
+            setTimeout(() => this.showNoSelectedIdsError.set(false), 3000);
+            return;
+        }
+
+        this._dialogs
+            .open<boolean>(new PolymorpheusComponent(PushDialog), {
+                dismissible: true,
+                data: { userIds: this.selectedIds() },
+            })
+            .subscribe({
+                next: (result) => {
+                    if (result) {
+                        this.selectedIds.set([]);
+                    }
+                },
+            });
+    }
+
+    public toggleSelection(userId: number, event: Event): void {
+        const target: EventTarget | null = event.target;
+        if (!(target instanceof HTMLInputElement)) {
+            return;
+        }
+        const checked: boolean = target.checked;
+        this.selectedIds.update((ids) =>
+            checked ? [...ids, userId] : ids.filter((id) => id !== userId)
+        );
+    }
+
+    public toggleAll(event: Event): void {
+        const target: EventTarget | null = event.target;
+        if (!(target instanceof HTMLInputElement)) {
+            return;
+        }
+        const checked: boolean = target.checked;
+        if (checked) {
+            this.selectedIds.set(this.clients().map((c) => c.user_id));
+        } else {
+            this.selectedIds.set([]);
+        }
     }
 
     public getAverageBill(client: ClientData): string {
