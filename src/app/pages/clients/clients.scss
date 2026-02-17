@@ -167,13 +167,20 @@
                     }
                 }
 
+                input {
+                    margin-left: 1rem;
+                    margin-top: -0.125rem;
+                }
+
                 .header-checkbox input {
                     border: 0.063rem solid var(--table-border-checkbox-header-color) !important;
+                    margin-top: -0.063rem !important;
                 }
 
                 .columns {
                     .top-left {
                         border-radius: 0.313rem 0 0 0;
+                        width: 2.875rem !important;
                     }
 
                     .top-right {
@@ -226,6 +233,10 @@
                             cursor: pointer;
                         }
                     }
+                }
+
+                .export-icon {
+                    margin-left: 2rem;
                 }
             }
         }

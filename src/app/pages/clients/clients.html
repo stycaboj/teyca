@@ -94,8 +94,11 @@
                     {{ client.phone }}
                 </td>
                 <td tuiTd>
-                    <!-- TODO процент для скидки -->
-                    {{ client.discount | dash }}
+                    @if (client.discount) {
+                        {{ client.discount }}%
+                    } @else {
+                        {{ client.discount | dash }}
+                    }
                 </td>
                 <td tuiTd>
                     {{ client.bonus | dash }}
@@ -108,7 +111,7 @@
                 </td>
                 <td tuiTd>
                     <a [href]="getLink(client)">
-                        <img src="images/export.svg" />
+                        <img class="export-icon" src="images/export.svg" />
                     </a>
                 </td>
                 <td tuiTd>
@@ -126,7 +129,8 @@
                             <teyca-select [value]="pageSize().toString()" [options]="pageSizeOptions"
                                 (valueChange)="changePageSize($event)"></teyca-select>
                             <span class="elements-count">
-                                {{ startItem() }} - {{ endItem() }} {{ 'clients.table.pagination.out_of' | translate }} {{
+                                {{ startItem() }} - {{ endItem() }} {{ 'clients.table.pagination.out_of' | translate }}
+                                {{
                                 total() }}
                             </span>
                         </div>

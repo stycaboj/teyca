@@ -16,9 +16,5 @@
         background-image: url(../../../../../public/images/rectangle.svg);
         background-repeat: no-repeat;
         background-position: right 0.656rem center;
-
-        &:focus {
-            background-image: url(../../../../../public/images/rectangle_up.png);
-        }
     }
 }
