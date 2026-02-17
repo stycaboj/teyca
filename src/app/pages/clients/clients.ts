@@ -48,7 +48,6 @@ export class Clients implements OnInit {
     private readonly _dialogs: TuiDialogService = inject(TuiDialogService);
 
     public readonly clients: Signal<ClientData[]> = this._clientsService.clients;
-    public readonly loading: Signal<boolean> = this._clientsService.loading;
     public readonly total: Signal<number> = this._clientsService.total;
     public readonly error: Signal<string | null> = this._clientsService.error;
 

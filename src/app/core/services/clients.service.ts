@@ -13,12 +13,10 @@ export class ClientsService {
     private readonly _baseUrl: string = 'https://api.teyca.ru/v1';
 
     private readonly _clients: WritableSignal<ClientData[]> = signal<ClientData[]>([]);
-    private readonly _loading: WritableSignal<boolean> = signal<boolean>(false);
     private readonly _total: WritableSignal<number> = signal<number>(0);
     private readonly _error: WritableSignal<string | null> = signal<string | null>(null);
 
     public readonly clients: Signal<ClientData[]> = this._clients.asReadonly();
-    public readonly loading: Signal<boolean> = this._loading.asReadonly();
     public readonly total: Signal<number> = this._total.asReadonly();
     public readonly error: Signal<string | null> = this._error.asReadonly();
 
@@ -31,7 +29,6 @@ export class ClientsService {
         }
 
         this._error.set(null);
-        this._loading.set(true);
 
         let httpParams: HttpParams = new HttpParams();
         if (params.limit !== undefined) {
@@ -58,12 +55,10 @@ export class ClientsService {
             next: (response) => {
                 this._clients.set(response.passes);
                 this._total.set(response.meta.size);
-                this._loading.set(false);
             },
             error: (err) => {
                 console.error('Error loading clients :', err);
                 this._error.set('Failed to load clients');
-                this._loading.set(false);
             },
         });
     }
