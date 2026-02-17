@@ -79,7 +79,7 @@ export class PushDialog {
             case 'tomorrow':
                 return new Date(now.setDate(now.getDate() + 1)).toISOString();
             default:
-                return new Date(now.setDate(now.getDate())).toISOString();
+                return undefined;
         }
     }
 }
