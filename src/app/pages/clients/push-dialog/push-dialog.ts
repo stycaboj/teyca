@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TeycaButton } from '../../../shared/ui/button/button';
 import { PushService } from '../../../core/services/push.service';
@@ -14,6 +14,7 @@ import { Error } from '../../../shared/ui/error/error';
     imports: [TranslatePipe, TeycaButton, TeycaSelect, Error],
     templateUrl: './push-dialog.html',
     styleUrl: './push-dialog.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PushDialog {
     private readonly _pushService: PushService = inject(PushService);

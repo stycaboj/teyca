@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     computed,
     DestroyRef,
@@ -41,6 +42,7 @@ import { SelectOption } from '../../core/types/select.types';
     ],
     templateUrl: './clients.html',
     styleUrl: './clients.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Clients implements OnInit {
     private readonly _clientsService: ClientsService = inject(ClientsService);

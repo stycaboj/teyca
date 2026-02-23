@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { SelectOption } from '../../../core/types/select.types';
 
 @Component({
@@ -6,6 +6,7 @@ import { SelectOption } from '../../../core/types/select.types';
     imports: [],
     templateUrl: './select.html',
     styleUrl: './select.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeycaSelect {
     public readonly value: InputSignal<string> = input<string>('');

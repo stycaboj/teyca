@@ -1,10 +1,11 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 
 @Component({
     selector: 'teyca-checkbox',
     imports: [],
     templateUrl: './checkbox.html',
     styleUrl: './checkbox.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeycaCheckbox {
     public readonly checked: InputSignal<boolean> = input<boolean>(false);

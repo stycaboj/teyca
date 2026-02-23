@@ -1,10 +1,11 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
 
 @Component({
     selector: 'button[teyca-button]',
     imports: [],
     templateUrl: './button.html',
     styleUrl: './button.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeycaButton {
     public readonly text: InputSignal<string> = input<string>('');
